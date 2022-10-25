@@ -13,29 +13,31 @@ export default function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [isFlipping, setIsFlipping] = useState<boolean>(true);
 
-  const searchCard = () => {
+  const searchCard = async () => {
     setLoading(true);
     const url = search ? `cards?q=name:${search}` : "cards";
-    axiosRequest(url)
-      .then((data) => {
-        setData(data.data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    try {
+      const response = await axiosRequest(url);
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  const getCards = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosRequest("cards");
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    setLoading(true);
-    axiosRequest("cards")
-      .then((data) => {
-        setData(data.data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    getCards();
   }, []);
 
   return (
@@ -48,7 +50,7 @@ export default function App() {
         alignItems: "center",
       }}
     >
-      <Stack direction={"row"} spacing={4} align={"center"}>
+      <Stack padding={"20px"} direction={"row"} spacing={4} align={"center"}>
         <Input
           color={"white"}
           colorScheme={"blue"}
