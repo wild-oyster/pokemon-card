@@ -11,7 +11,7 @@ const Loader = () => {
         <div id="line_button"></div>
         <div id="button"></div>
       </div>
-      <div id="loading">loading...</div>
+      <div id="loading">loading</div>
     </div>
   );
 };

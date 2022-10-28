@@ -1,0 +1,84 @@
+/* Loader https://codepen.io/eric-calhoun/pen/qBBpZvq */
+#container {
+  position: relative;
+  margin: auto;
+  display: block;
+  height: 100px;
+  width: 100px;
+}
+#pokeball_container {
+  position: relative;
+  margin: auto;
+  display: block;
+  height: 100px;
+  width: 100px;
+  animation: rotate 1s infinite;
+}
+#top {
+  position: absolute;
+  margin: auto;
+  display: block;
+  background-color: red;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+#bottom {
+  position: absolute;
+  margin: auto;
+  display: block;
+  background-color: white;
+  top: 50px;
+  height: 50px;
+  width: 100px;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+#line {
+  position: absolute;
+  margin: auto;
+  display: block;
+  background-color: black;
+  top: 45px;
+  height: 10px;
+  width: 100px;
+}
+#line_button {
+  position: absolute;
+  margin: auto;
+  display: block;
+  background-color: black;
+  left: 35px;
+  top: 35px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+#button {
+  position: absolute;
+  margin: auto;
+  display: block;
+  background-color: white;
+  left: 40px;
+  top: 40px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+#loading {
+  position: relative;
+  margin: 20px auto;
+  color: white;
+  font-family: arial;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

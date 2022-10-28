@@ -3,8 +3,8 @@ import "./styles.css";
 import { Button, Input, Stack, Switch, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-import Card from "./Card";
-import Loader from "./Loader";
+import Card from "./components/Card/Card";
+import Loader from "./components/Loader/Loader";
 import { axiosRequest } from "./request";
 
 export default function App() {
