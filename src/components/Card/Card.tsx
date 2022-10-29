@@ -3,19 +3,15 @@ import "./styles.css";
 import { animated, config, useSpring } from "react-spring";
 
 import React from "react";
+import { round } from "../../utils/math";
 
 export type CardProps = {
   src: string;
   flipped?: boolean;
 };
 
-const round = (num: number, fix = 3) => parseFloat(num.toFixed(fix));
-
-const trans = (x: number, y: number, s: number) =>
-  `perspective(600px) rotateX(${y}deg) rotateY(${x}deg) scale(${s})`;
-
 const Card: React.FC<CardProps> = ({ src, flipped }) => {
-  const [props, set] = useSpring(() => ({
+  const [{ xys }, set] = useSpring(() => ({
     xys: [0, 0, 1],
     config: { ...config.gentle, damping: 0.25 },
   }));
@@ -48,7 +44,10 @@ const Card: React.FC<CardProps> = ({ src, flipped }) => {
         height="365"
         style={{
           margin: "20px",
-          transform: props.xys.to(trans),
+          transform: xys.to(
+            (x: number, y: number, s: number) =>
+              `perspective(600px) rotateX(${y}deg) rotateY(${x}deg) scale(${s})`
+          ),
           transformOrigin: "center",
           // @ts-ignore
           imageRendering: "optimizeQuality",
@@ -87,7 +86,10 @@ const Card: React.FC<CardProps> = ({ src, flipped }) => {
       style={{
         margin: "20px",
         cursor: "pointer",
-        transform: props.xys.to(trans),
+        transform: xys.to(
+          (x: number, y: number, s: number) =>
+            `perspective(600px) rotateX(${y}deg) rotateY(${x}deg) scale(${s})`
+        ),
         transformOrigin: "center",
         // @ts-ignore
         imageRendering: "optimizeQuality",

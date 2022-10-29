@@ -3,13 +3,15 @@ import "./styles.css";
 import { Button, Input, Stack, Switch, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
+import { AxiosResponse } from "axios";
 import Card from "./components/Card/Card";
 import { Card as CardType } from "./interfaces/card";
 import Loader from "./components/Loader/Loader";
-import { axiosRequest } from "./request";
+import { axiosRequest } from "./api/request";
+import { groupApiCardsTransformer } from "./api/transformers/groupApiCardsTransformer";
 
 export default function App() {
-  const [data, setData] = useState<Array<CardType>>([]);
+  const [data, setData] = useState<CardType[]>([]);
   const [search, setSearch] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [isFlipping, setIsFlipping] = useState<boolean>(true);
@@ -29,7 +31,8 @@ export default function App() {
   const getCards = async () => {
     setLoading(true);
     try {
-      const response = await axiosRequest("cards");
+      const response: AxiosResponse<CardType[]> = await axiosRequest("cards");
+      console.log(groupApiCardsTransformer(response.data));
       setData(response.data);
       setLoading(false);
     } catch (error) {
@@ -42,15 +45,7 @@ export default function App() {
   }, []);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
+    <div className="w-full h-full flex flex-col items-center">
       <Stack padding={"20px"} direction={"row"} spacing={4} align={"center"}>
         <Input
           color={"white"}
@@ -64,13 +59,7 @@ export default function App() {
           value={search || ""}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button
-          color={"white"}
-          colorScheme={"gray"}
-          variant="outline"
-          size={"sm"}
-          onClick={searchCard}
-        >
+        <Button size={"sm"} onClick={searchCard}>
           Search
         </Button>
         <Switch
