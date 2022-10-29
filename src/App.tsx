@@ -86,21 +86,11 @@ export default function App() {
         {!loading &&
           data.length > 0 &&
           data.map((pokemon) => {
-            if (!isFlipping)
-              return <Card key={pokemon.id} src={pokemon.images.large} />;
-
             return (
-              <img
+              <Card
                 key={pokemon.id}
                 src={pokemon.images.large}
-                alt="pokemon"
-                width="260"
-                height="365"
-                style={{
-                  margin: "10px",
-                  padding: "10px 10px 10px 10px",
-                  borderRadius: "20px",
-                }}
+                flipped={isFlipping}
               />
             );
           })}
