@@ -4,11 +4,12 @@ import { Button, Input, Stack, Switch, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import Card from "./components/Card/Card";
+import { Card as CardType } from "./interfaces/card";
 import Loader from "./components/Loader/Loader";
 import { axiosRequest } from "./request";
 
 export default function App() {
-  const [data, setData] = useState<Array<any>>([]);
+  const [data, setData] = useState<Array<CardType>>([]);
   const [search, setSearch] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [isFlipping, setIsFlipping] = useState<boolean>(true);
@@ -85,11 +86,11 @@ export default function App() {
         {loading && <Loader />}
         {!loading &&
           data.length > 0 &&
-          data.map((pokemon) => {
+          data.map((card) => {
             return (
               <Card
-                key={pokemon.id}
-                src={pokemon.images.large}
+                key={card.id}
+                src={card.images.large}
                 flipped={isFlipping}
               />
             );

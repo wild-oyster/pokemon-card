@@ -1,0 +1,40 @@
+import { Ability } from "./ability";
+import { AncientTrait } from "./ancientTraits";
+import { Attack } from "./attacks";
+import { CardImage } from "./image";
+import { Cardmarket } from "./cardmarket";
+import { Legality } from "./legality";
+import { Resistance } from "./resistance";
+import { Set } from "./set";
+import { TCGPlayer } from "./tcgplayer";
+import { Weakness } from "./weakness";
+
+export interface Card {
+  id: string;
+  name: string;
+  supertype: string;
+  subtypes: string[];
+  hp?: string;
+  types?: string[];
+  evolvesFrom?: string;
+  evolvesTo?: string[];
+  rules?: string[];
+  ancientTrait?: AncientTrait;
+  abilities?: Ability[];
+  attacks?: Attack[];
+  weaknesses?: Weakness[];
+  resistances?: Resistance[];
+  retreatCost?: string[];
+  convertedRetreatCost?: number;
+  set: Set;
+  number: string;
+  artist?: string;
+  rarity: string;
+  flavorText?: string;
+  nationalPokedexNumbers?: number[];
+  legalities: Legality;
+  regulationMark?: string;
+  images: CardImage;
+  tcgplayer?: TCGPlayer;
+  cardmarket?: Cardmarket;
+}

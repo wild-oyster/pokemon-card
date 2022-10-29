@@ -24,6 +24,7 @@ const Card: React.FC<CardProps> = ({ src, flipped }) => {
     return (
       <animated.img
         onPointerMove={({ clientX: x, clientY: y, target }) => {
+          // https://github.com/simeydotme/pokemon-cards-css
           // @ts-ignore
           const rect = target.getBoundingClientRect();
           const absolute = {
@@ -64,6 +65,7 @@ const Card: React.FC<CardProps> = ({ src, flipped }) => {
   return (
     <animated.div
       onPointerMove={({ clientX: x, clientY: y, target }) => {
+        // https://github.com/simeydotme/pokemon-cards-css
         // @ts-ignore
         const rect = target.getBoundingClientRect();
         const absolute = {
