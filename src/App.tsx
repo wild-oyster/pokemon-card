@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import Card from "./components/Card/Card";
 import { Card as CardType } from "./interfaces/card";
+import Category from "./components/Category/Category";
+import { Dictionary } from "lodash";
 import Loader from "./components/Loader/Loader";
 import { axiosRequest } from "./api/request";
 import { groupApiCardsTransformer } from "./api/transformers/groupApiCardsTransformer";
 
 export default function App() {
-  const [data, setData] = useState<CardType[]>([]);
+  const [data, setData] = useState<Dictionary<CardType[]>>({});
   const [search, setSearch] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [isFlipping, setIsFlipping] = useState<boolean>(true);
@@ -21,7 +23,7 @@ export default function App() {
     const url = search ? `cards?q=name:${search}` : "cards";
     try {
       const response = await axiosRequest(url);
-      setData(response.data);
+      setData(groupApiCardsTransformer(response.data));
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -32,8 +34,7 @@ export default function App() {
     setLoading(true);
     try {
       const response: AxiosResponse<CardType[]> = await axiosRequest("cards");
-      console.log(groupApiCardsTransformer(response.data));
-      setData(response.data);
+      setData(groupApiCardsTransformer(response.data));
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -74,14 +75,21 @@ export default function App() {
       <div className="App">
         {loading && <Loader />}
         {!loading &&
-          data.length > 0 &&
-          data.map((card) => {
+          Object.keys(data).map((key) => {
             return (
-              <Card
-                key={card.id}
-                src={card.images.large}
-                flipped={isFlipping}
-              />
+              <Category title={key}>
+                <div className="flex flex-wrap items-center justify-center">
+                  {data[key].map((card) => {
+                    return (
+                      <Card
+                        key={card.id}
+                        src={card.images.large}
+                        flipped={isFlipping}
+                      />
+                    );
+                  })}
+                </div>
+              </Category>
             );
           })}
       </div>
