@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "pokemon";
+  src: url("./assets/fonts/Pokemon\ Solid.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: rgb(57, 60, 66) !important;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  padding: 80px;
+  height: 100%;
+  text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+  .App {
+    padding: 20px;
+  }
+}

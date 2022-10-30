@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./index.css";
 
 import { Button, Input, Stack, Switch, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -77,7 +77,7 @@ export default function App() {
         {!loading &&
           Object.keys(data).map((key) => {
             return (
-              <Category title={key}>
+              <Category className="mb-8" title={key}>
                 <div className="flex flex-wrap items-center justify-center">
                   {data[key].map((card) => {
                     return (

@@ -5,7 +5,7 @@ import { Card } from "../../interfaces/card";
 export const groupApiCardsTransformer = (cards: Card[]): Dictionary<Card[]> => {
   const groupedCards: Dictionary<Card[]> = {};
 
-  const availableSubtypes = uniq(cards.flatMap((card) => card.subtypes));
+  const availableSubtypes = uniq(cards.flatMap((card) => card.subtypes)).sort();
 
   availableSubtypes.forEach((subtype) => {
     groupedCards[subtype] = cards.filter((card) =>
